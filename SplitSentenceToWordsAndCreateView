@@ -1,0 +1,49 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SplitSentenceToWordsAndCreateView`(IN input_sentence VARCHAR(255), IN view_name VARCHAR(255))
+BEGIN
+    DECLARE word_separator VARCHAR(1);
+    DECLARE start_pos INT;
+    DECLARE end_pos INT;
+    DECLARE current_word VARCHAR(255);
+
+    SET word_separator = ' ';
+    SET start_pos = 1;
+
+    -- Drop the view if it already exists
+    SET @drop_sql = CONCAT('DROP VIEW IF EXISTS ', view_name);
+    PREPARE drop_stmt FROM @drop_sql;
+    EXECUTE drop_stmt;
+    DEALLOCATE PREPARE drop_stmt;
+
+    -- Create a table to store the words
+    CREATE TABLE temp_words (Word VARCHAR(255));
+
+    WHILE start_pos <= LENGTH(input_sentence) DO
+        SET end_pos = LOCATE(word_separator, input_sentence, start_pos);
+
+        IF end_pos = 0 THEN
+            SET end_pos = LENGTH(input_sentence) + 1;
+        END IF;
+
+        SET current_word = SUBSTRING(input_sentence, start_pos, end_pos - start_pos);
+
+        -- Insert the current word into the temporary table
+        INSERT INTO temp_words (Word) VALUES (current_word);
+
+        SET start_pos = end_pos + 1;
+    END WHILE;
+
+    -- Create a view based on the table
+    SET @create_view_sql = CONCAT('CREATE VIEW ', view_name, ' AS SELECT * FROM temp_words');
+    PREPARE create_view_stmt FROM @create_view_sql;
+    EXECUTE create_view_stmt;
+    DEALLOCATE PREPARE create_view_stmt;
+
+    -- Optionally, you can select and display the contents of the view
+    SET @select_sql = CONCAT('SELECT * FROM ', view_name);
+    PREPARE select_stmt FROM @select_sql;
+    EXECUTE select_stmt;
+    DEALLOCATE PREPARE select_stmt;
+
+    -- Drop the temporary table (optional, depends on your requirements)
+    DROP TABLE IF EXISTS temp_words;
+END
