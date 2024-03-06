@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SplitSentenceToWordsAndCreateView`(IN input_sentence VARCHAR(255), IN view_name VARCHAR(255))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SplitSentenceToWordsAndCreateView`(IN input_sentence VARCHAR(255))
 BEGIN
     DECLARE word_separator VARCHAR(1);
     DECLARE start_pos INT;
@@ -32,6 +32,6 @@ BEGIN
 
    
 
-    -- Drop the temporary table (optional, depends on your requirements)
+    
    
 END
