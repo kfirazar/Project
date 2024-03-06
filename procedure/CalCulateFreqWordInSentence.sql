@@ -11,3 +11,4 @@ BEGIN
     where Count IS NULL;
 
 END
+CalCulateFreqWordInSentence
