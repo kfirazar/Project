@@ -7,8 +7,8 @@ BEGIN
 	GROUP BY Word;
 	
 	DELETE 
-    from temp_words
-    where Count IS NULL;
+    	from temp_words
+    	where Count IS NULL;
 
 END
 CalCulateFreqWordInSentence
