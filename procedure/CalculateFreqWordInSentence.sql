@@ -8,7 +8,7 @@ BEGIN
 	
 	DELETE 
     	from temp_words
-    	where Count IS NULL;
+    	where Count is NULL;
 
 END
 CalCulateFreqWordInSentence
