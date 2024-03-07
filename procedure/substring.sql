@@ -13,7 +13,7 @@ BEGIN
     
 
     -- Create a table to store the words
-    CREATE TABLE temp_words (Word VARCHAR(255),Count INT,Freq Float);
+    CREATE TABLE temp_words (Word VARCHAR(255),Count INT,Freq Float,GeneralFreq Float);
 
     WHILE start_pos <= LENGTH(input_sentence) DO
         SET end_pos = LOCATE(word_separator, input_sentence, start_pos);
