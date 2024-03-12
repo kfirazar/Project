@@ -8,5 +8,9 @@ BEGIN
                   FROM freq_of_words AS fow
                   WHERE temp_words.Word = fow.Word);
 
-    
+
+
+	#Should be touched:
+		-What will happen to first occur word --> no background avgEng history
+		-What Will be the formula for dealing with freq in sentence WITH freq/avgEng ( table : freq_of_words);
 END
