@@ -1,14 +1,12 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GeneralFreqOfWord`()
 BEGIN
-	SELECT *
-	FROM freq_of_words
-	WHERE Word IN (SELECT UPPER(Word) FROM temp_words) OR Word IN (SELECT LOWER(Word) FROM temp_words);
 	
-    
-    INSERT INTO temp_words (GeneralFreq)
-	SELECT *
-	FROM freq_of_words
-	WHERE Word IN (SELECT UPPER(Word) FROM temp_words) OR Word IN (SELECT LOWER(Word) FROM temp_words)   ;
-	
+	#Run throgh the generalFreq of each word and retrive its freq
+        
+	UPDATE temp_words
+	SET GeneralFreq = (SELECT fow.AvgEng
+                  FROM freq_of_words AS fow
+                  WHERE temp_words.Word = fow.Word);
+
     
 END
