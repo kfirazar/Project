@@ -15,9 +15,7 @@ BEGIN
 		
 		-- Fetch the word count from temp_words
 		SET word_count_add = (SELECT COUNT(*) FROM temp_words WHERE word = NEW.word);
-        if word = 'Is' then 
-		select word_count_add as "word_count_add";
-        end if;
+      
         
 		-- Check if the word already exists in freq_of_words
 		IF EXISTS (SELECT * FROM freq_of_words WHERE word = NEW.word) THEN
