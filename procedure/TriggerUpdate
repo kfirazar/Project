@@ -2,20 +2,23 @@
 DELIMITER //
 CREATE TRIGGER UpdateFreq AFTER INSERT ON temp_words FOR EACH ROW 
 BEGIN 
-	#Check if Count cell are Null 
+	#Check if Word_Count cell are Null 
 		-- True  : DO NOTHING
-        -- False : Continue
+       		-- False : Continue
 	-- Declare variables
 	DECLARE word_count_add INT;
     
-	if exists (select *  from temp_words where Count is NULL )
+	if exists (select *  from temp_words where Word_Count is NULL )
     THEN 
     
 	
 		
 		-- Fetch the word count from temp_words
 		SET word_count_add = (SELECT COUNT(*) FROM temp_words WHERE word = NEW.word);
-		
+        if word = 'Is' then 
+		select word_count_add as "word_count_add";
+        end if;
+        
 		-- Check if the word already exists in freq_of_words
 		IF EXISTS (SELECT * FROM freq_of_words WHERE word = NEW.word) THEN
 			-- Update the count in freq_of_words table
@@ -24,11 +27,10 @@ BEGIN
 			WHERE word = NEW.word; 
 		ELSE
 			-- Insert the new word into freq_of_words table
-			INSERT INTO freq_of_words (word, count)
+			INSERT INTO freq_of_words (word, Word_Count)
 			VALUES (NEW.word, word_count_add);
 		END IF;
 	
     END IF;
 END;
 //
-DELIMITER ;
