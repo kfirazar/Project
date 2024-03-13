@@ -1,6 +1,8 @@
 
+
+
 DELIMITER //
-CREATE TRIGGER UpdateFreq AFTER INSERT ON temp_words FOR EACH ROW 
+CREATE TRIGGER UpdateCount AFTER INSERT ON temp_words FOR EACH ROW 
 BEGIN 
 	#Check if Word_Count cell are Null 
 		-- True  : DO NOTHING
