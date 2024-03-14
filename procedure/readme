@@ -1,2 +1,5 @@
 CalCulateFreqWordInSentence = "Calculate Freq"    :
   based on : function SplitSentenceToWordsAndCreateView = "Substring a Sentence" 
+
+
+there is a trigger which wait for insertion of numeric value for colounm "Word_Count" in "temp_words" table
