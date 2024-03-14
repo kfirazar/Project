@@ -1,16 +1,15 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GeneralFreqOfWord`()
 BEGIN
 	
-	#Run throgh the generalFreq of each word and retrive its freq
-        
-	UPDATE temp_words
-	SET GeneralFreq = (SELECT fow.AvgEng
-                  FROM freq_of_words AS fow
-                  WHERE temp_words.Word = fow.Word);
+	    DECLARE general_amount INT;
+	    SELECT SUM(Word_Count) INTO general_amount  FROM  freq_of_words;
+
+	    --Update the the freq of each word from "freq_of_words" table
+	    UPDATE freq_of_words fow SET AvgEng = fow.Word_Count / general_amount;
 
 
-
-	#Should be touched:
-		-What will happen to first occur word --> no background avgEng history
-		-What Will be the formula for dealing with freq in sentence WITH freq/avgEng ( table : freq_of_words);
+            --Update the value for the freq inside "temp_words" table
+	    UPDATE temp_words fow
+	    SET GeneralFreq = (SELECT AvgEng  from freq_of_words a1 where  a1.Word = fow.Word);
+						
 END
