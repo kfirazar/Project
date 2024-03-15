@@ -1,0 +1,16 @@
+-- Trigger for when a new sentence is coming , the system will start redirect it to Substring
+
+DELIMITER //
+CREATE TRIGGER InsertToSubstring AFTER INSERT ON tweets FOR EACH ROW 
+BEGIN 
+	DECLARE sentence VARCHAR(255);
+    
+    #Get the last 
+	SELECT  Tweet INTO sentence FROM tweets order by DateOfUpload desc  limit 1;
+	
+    -- call SplitSentenceToWordsAndCreateView(sentence);
+
+
+
+END;
+//
