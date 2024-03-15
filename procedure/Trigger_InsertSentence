@@ -7,7 +7,10 @@ BEGIN
     
     #Get the last 
 	SELECT  Tweet INTO sentence FROM tweets order by DateOfUpload desc  limit 1;
-	
+
+
+    # Error : should find solotion for how to call other functio / do something else at the end 
+    #         of a trigger --> having a flow in the system 
     -- call SplitSentenceToWordsAndCreateView(sentence);
 
 
