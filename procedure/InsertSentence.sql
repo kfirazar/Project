@@ -9,5 +9,7 @@ BEGIN
 
 	Insert into tweets (UserId,Tweet,DateOfUpload,BackgroundData)
     VALUES(UserId,input_sentence,excel_serial_date,BackgroundData);
+
+	call SplitSentenceToWordsAndCreateView(input_sentence);
     
 END
