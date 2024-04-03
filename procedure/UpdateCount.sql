@@ -36,12 +36,15 @@ BEGIN
         
         #Get The value the count value of the current word from temp_words 
         Select Word_Count  Into newCount  from temp_words where Word = word_text;
-
+		
         
 		SELECT Word_Count INTO countWord FROM freq_of_words WHERE Word = word_text;
-		
-        if countWord is Null then 
+        
+
+        
+        if (SELECT COUNT(*) FROM freq_of_words where Word = word_text) =0 then 
 			#Insert
+            SELECT word_text;
              INSERT INTO freq_of_words (Word,Word_Count,AvgEng) VALUES (word_text,newCount,0); 
 		else
 			UPDATE freq_of_words 
