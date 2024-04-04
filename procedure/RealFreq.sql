@@ -42,7 +42,8 @@ BEGIN
         -- Insert calculated values into DataForRegression table
         INSERT INTO dataforregression (Word, GeneralFreq, RealFreq)
         VALUES (word_text, AvgEng2, realfreq);
-      	
+        #SELECT AvgEng2 , countWord , word_text, realfreq;
+			
     END LOOP;
 
 	
