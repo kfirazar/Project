@@ -1,7 +1,7 @@
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UserStats`(In userId_ INT)
 BEGIN
 	#Display all sentence by UserId
-    Select Tweet from tweets where UserId = userId_;
+    Select * from tweets where UserId = userId_;
 	
 	
 	select concat( "The most engagement user is " ,( SELECT User_name FROM engage_data order by Avg_Engagement desc limit 1));
