@@ -12,4 +12,6 @@ BEGIN
     from temp_words
     where Word_Count IS NULL;
 
+
+  
 END
