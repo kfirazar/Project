@@ -1,5 +1,3 @@
-# Calculate the basic data for linear regression formula
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Regression`()
 BEGIN
     DECLARE done BOOLEAN DEFAULT FALSE;
@@ -8,6 +6,9 @@ BEGIN
     DECLARE text_word VARCHAR(255);
     DECLARE AvgGeneralFreq FLOAT;
     DECLARE AvgRealFreq FLOAT;
+
+
+
 
     -- Declare cursor
     DECLARE rowCur CURSOR FOR SELECT Word FROM dataforregression;
@@ -42,7 +43,12 @@ BEGIN
         WHERE Word = text_word;
 
     END LOOP;
-
+	################
+    -- Regression step 2
+	################
+    
+	
+	#################
     -- Close cursor
     CLOSE rowCur;
 END
