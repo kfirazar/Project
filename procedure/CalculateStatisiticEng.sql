@@ -5,16 +5,18 @@ BEGIN
 	#			SUM the engagement of the total apperance in each sentence that it is in / the count 	
 	#
 
+	
     -- Declare variables
     DECLARE done INT DEFAULT FALSE;
     DECLARE word_text VARCHAR(255);
     DECLARE realfreq FLOAT;
-    Declare countWord int;
+    Declare countWord INT;
     -- Declare cursor
     DECLARE rowCur CURSOR FOR SELECT word FROM temp_words;
     
     -- Declare handler for cursor
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+	SET SQL_SAFE_UPDATES = 0;
 
     -- Open cursor
     OPEN rowCur;
@@ -36,10 +38,11 @@ BEGIN
         SELECT SUM(Engagement) / countWord INTO realfreq FROM tweets
         WHERE Tweet LIKE CONCAT('%', word_text, '%');
         
-        -- Display or do something with realfreq, like store it somewhere
-        SELECT word_text, realfreq; -- For testing purposes, you can display the value
-		
+     	
         #INSERT IT TO temp_words table 
+         update temp_words
+        SET RealFreq = realfreq
+        where Word = word_text;
         
     END LOOP;
 
