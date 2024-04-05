@@ -11,9 +11,6 @@ BEGIN
 	ORDER BY AvgEng DESC
 	LIMIT 50;
 
-    select Tweet as " User Tweets " from tweets where UserId = userId_;
-   
-    
-    
+
     
 END
