@@ -54,9 +54,8 @@ BEGIN
 
     -- Calculate the average y_hat
     SELECT 100 * res / i  INTO sum
-    -- In MySQL, the DUAL table is a special one-row, one-column table that is used in certain contexts where a table reference is required, but the actual table being referenced doesn't matter.
     FROM DUAL;
-   
+
     -- Update the prediction of the tweet
     UPDATE tweets 
     SET PureEngage = sum
@@ -67,7 +66,10 @@ BEGIN
     SET Avg_Engagement = (
         SELECT COALESCE(AVG(PureEngage), 0)
         FROM tweets 
-        WHERE UserId = 14
+        WHERE UserId = (SELECT User_num FROM (
+			SELECT User_num 
+			FROM engage_data 
+			WHERE User_name = username) AS subquery)
     )
     WHERE User_name = username;
 END
